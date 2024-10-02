@@ -1,0 +1,20 @@
+# Ignorar arquivos de build
+bin/
+obj/
+
+# Ignorar arquivos de configuração do Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.ide
+
+# Ignorar arquivos de pacotes
+packages/
+*.nupkg
+
+# Ignorar arquivos de log
+*.log
+
+# Ignorar diretórios de publicação
+publish/
