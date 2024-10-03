@@ -19,10 +19,14 @@ namespace CursoWindowsForms
         int ControleValidaCPF = 0;
         int ControleValidaSenha = 0;
         int ControleValidaCPF2 = 0;
+        int ControleArquivoImagem = 0;
 
         public Frm_Principal_Menu_UC()
         {
             InitializeComponent();
+            novoToolStripMenuItem.Enabled = false;
+            apagarAbaToolStripMenuItem.Enabled = false;
+            abrirImagemToolStripMenuItem.Enabled = false;
         }
 
         private void validaCPFToolStripMenuItem_Click(object sender, EventArgs e)
@@ -114,6 +118,87 @@ namespace CursoWindowsForms
             {
                 Tbc_Aplicacoes.TabPages.Remove(Tbc_Aplicacoes.SelectedTab);
             }
+        }
+
+        private void abrirImagemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog Db = new OpenFileDialog();
+            Db.InitialDirectory = "C:\\Users\\User\\Desktop\\Arquivos e programas\\Estudos\\CursoWindowsForms\\CursoWindowsForms\\Imagens";
+            Db.Filter = "PNG|*.PNG";
+            Db.Title = "Escolha a imagem";
+
+            if (Db.ShowDialog() == DialogResult.OK)
+            {
+                string NomeArquivoImagem = Db.FileName;
+
+
+                ControleArquivoImagem += 1;
+                Frm_ArquivoImagem_UC U = new Frm_ArquivoImagem_UC(NomeArquivoImagem);
+                U.Dock = DockStyle.Fill;
+                TabPage TB = new TabPage();
+                TB.Name = "Arquivo Imagem " + ControleArquivoImagem;
+                TB.Text = "Arquivo Imagem " + ControleArquivoImagem;
+                TB.ImageIndex = 6;
+                TB.Controls.Add(U);
+                Tbc_Aplicacoes.TabPages.Add(TB);
+            }
+
+
+        }
+
+        private void conectarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_Login f = new Frm_Login();
+            f.ShowDialog();
+
+            if (f.DialogResult == DialogResult.OK)
+            {
+                string senha = f.senha;
+                string login = f.login;
+
+                if (CursoWindowsFormsBiblioteca.Cls_Uteis.ValidaSenhaLogin(senha, login) == true)
+                {
+                    novoToolStripMenuItem.Enabled = true;
+                    apagarAbaToolStripMenuItem.Enabled = true;
+                    abrirImagemToolStripMenuItem.Enabled = true;
+                    conectarToolStripMenuItem.Enabled = false;
+                    desconectarToolStripMenuItem.Enabled = true;
+
+                    MessageBox.Show("Login realizado","Sucesso", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    MessageBox.Show("Login e/ou senha erradaos", "Falha", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+
+
+
+            }
+        }
+
+        private void desconectarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+
+            Frm_Questao F = new Frm_Questao("icons8_question_961", "Desconectar?");
+            F.ShowDialog();
+
+            if (F.DialogResult == DialogResult.Yes)
+            {
+
+
+                while (Tbc_Aplicacoes.TabPages.Count > 0){
+                    Tbc_Aplicacoes.TabPages.Remove(Tbc_Aplicacoes.SelectedTab);
+                }
+
+                novoToolStripMenuItem.Enabled = false;
+                apagarAbaToolStripMenuItem.Enabled = false;
+                abrirImagemToolStripMenuItem.Enabled = false;
+                conectarToolStripMenuItem.Enabled = true;
+                desconectarToolStripMenuItem.Enabled = false;
+
+            }    
+
         }
     }
 }

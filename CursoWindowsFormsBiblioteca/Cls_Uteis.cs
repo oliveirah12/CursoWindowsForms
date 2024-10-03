@@ -129,5 +129,15 @@ namespace CursoWindowsFormsBiblioteca
             }
         }
 
+        public static bool ValidaSenhaLogin(string senha, string login)
+        {
+            if(senha == "adm" && login == "adm")
+            {
+                return true;
+            }
+            return false;
+
+        }
+
     }
 }
