@@ -12,11 +12,12 @@ namespace CursoWindowsFormsBiblioteca
 
         public static bool validaSenhaLogin(string senha)
         {
-            if (senha == "curso")
-            {
-                return true;
-            }
-            return false;
+            //if (senha == "curso")
+            //{
+            //    return true;
+            //}
+            //return false;
+            return true;
         }
 
         public static bool Valida(string cpf)

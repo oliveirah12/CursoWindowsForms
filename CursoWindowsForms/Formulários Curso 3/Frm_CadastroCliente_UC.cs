@@ -66,6 +66,14 @@ namespace CursoWindowsForms
             Cmb_Estados.Items.Add("São Paulo(SP)");
             Cmb_Estados.Items.Add("Sergipe(SE)");
             Cmb_Estados.Items.Add("Tocantins(TO)");
+
+            Tls_Principal.Items[0].ToolTipText = "Incluir novo cliente";
+            Tls_Principal.Items[1].ToolTipText = "Carregar cliente cadastrado";
+            Tls_Principal.Items[2].ToolTipText = "Salvar cliente";
+            Tls_Principal.Items[3].ToolTipText = "Apagar cliente";
+            Tls_Principal.Items[4].ToolTipText = "Limpar formulário";
+
+
         }
 
         private void Chk_TemPai_CheckedChanged(object sender, EventArgs e)
@@ -78,6 +86,31 @@ namespace CursoWindowsForms
             { 
                 Txt_NomePai.Enabled = true; 
             }
+        }
+
+        private void novoToolStripButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Novo Cadastro");
+        }
+
+        private void abrirToolStripButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Cliente Carregado");
+        }
+
+        private void salvarToolStripButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Cliente Salvo");
+        }
+
+        private void Apaga_toolStripButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Cliente Apagado");
+        }
+
+        private void Limpar_toolStripButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Cliente Limpo");
         }
     }
 }
