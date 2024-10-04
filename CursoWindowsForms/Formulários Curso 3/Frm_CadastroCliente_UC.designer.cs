@@ -69,8 +69,8 @@
             this.novoToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.abrirToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.salvarToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.Apaga_toolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.Limpar_toolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.ApagatoolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.LimpartoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.Grp_Codigo.SuspendLayout();
             this.Grp_DadosPessoais.SuspendLayout();
             this.Grp_Genero.SuspendLayout();
@@ -194,6 +194,7 @@
             this.Txt_CEP.Name = "Txt_CEP";
             this.Txt_CEP.Size = new System.Drawing.Size(132, 20);
             this.Txt_CEP.TabIndex = 10;
+            this.Txt_CEP.Leave += new System.EventHandler(this.Txt_CEP_Leave);
             // 
             // Lbl_CEP
             // 
@@ -433,11 +434,11 @@
             this.novoToolStripButton,
             this.abrirToolStripButton,
             this.salvarToolStripButton,
-            this.Apaga_toolStripButton,
-            this.Limpar_toolStripButton});
+            this.ApagatoolStripButton,
+            this.LimpartoolStripButton});
             this.Tls_Principal.Location = new System.Drawing.Point(0, 0);
             this.Tls_Principal.Name = "Tls_Principal";
-            this.Tls_Principal.Size = new System.Drawing.Size(715, 25);
+            this.Tls_Principal.Size = new System.Drawing.Size(781, 25);
             this.Tls_Principal.TabIndex = 56;
             this.Tls_Principal.Text = "toolStrip1";
             // 
@@ -449,6 +450,7 @@
             this.novoToolStripButton.Name = "novoToolStripButton";
             this.novoToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.novoToolStripButton.Text = "&Novo";
+            this.novoToolStripButton.ToolTipText = "Novo";
             this.novoToolStripButton.Click += new System.EventHandler(this.novoToolStripButton_Click);
             // 
             // abrirToolStripButton
@@ -471,25 +473,25 @@
             this.salvarToolStripButton.Text = "&Salvar";
             this.salvarToolStripButton.Click += new System.EventHandler(this.salvarToolStripButton_Click);
             // 
-            // Apaga_toolStripButton
+            // ApagatoolStripButton
             // 
-            this.Apaga_toolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Apaga_toolStripButton.Image = global::CursoWindowsForms.Properties.Resources.ExcluirBarra;
-            this.Apaga_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Apaga_toolStripButton.Name = "Apaga_toolStripButton";
-            this.Apaga_toolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.Apaga_toolStripButton.Text = "toolStripButton1";
-            this.Apaga_toolStripButton.Click += new System.EventHandler(this.Apaga_toolStripButton_Click);
+            this.ApagatoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ApagatoolStripButton.Image = global::CursoWindowsForms.Properties.Resources.ExcluirBarra;
+            this.ApagatoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ApagatoolStripButton.Name = "ApagatoolStripButton";
+            this.ApagatoolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.ApagatoolStripButton.Text = "toolStripButton1";
+            this.ApagatoolStripButton.Click += new System.EventHandler(this.ApagatoolStripButton_Click);
             // 
-            // Limpar_toolStripButton
+            // LimpartoolStripButton
             // 
-            this.Limpar_toolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Limpar_toolStripButton.Image = global::CursoWindowsForms.Properties.Resources.LimparBarra;
-            this.Limpar_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Limpar_toolStripButton.Name = "Limpar_toolStripButton";
-            this.Limpar_toolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.Limpar_toolStripButton.Text = "toolStripButton1";
-            this.Limpar_toolStripButton.Click += new System.EventHandler(this.Limpar_toolStripButton_Click);
+            this.LimpartoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.LimpartoolStripButton.Image = global::CursoWindowsForms.Properties.Resources.LimparBarra;
+            this.LimpartoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.LimpartoolStripButton.Name = "LimpartoolStripButton";
+            this.LimpartoolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.LimpartoolStripButton.Text = "toolStripButton1";
+            this.LimpartoolStripButton.Click += new System.EventHandler(this.LimpartoolStripButton_Click);
             // 
             // Frm_CadastroCliente_UC
             // 
@@ -501,7 +503,7 @@
             this.Controls.Add(this.Grp_DadosPessoais);
             this.Controls.Add(this.Grp_Codigo);
             this.Name = "Frm_CadastroCliente_UC";
-            this.Size = new System.Drawing.Size(715, 584);
+            this.Size = new System.Drawing.Size(781, 589);
             this.Grp_Codigo.ResumeLayout(false);
             this.Grp_Codigo.PerformLayout();
             this.Grp_DadosPessoais.ResumeLayout(false);
@@ -561,7 +563,7 @@
         private System.Windows.Forms.ToolStripButton novoToolStripButton;
         private System.Windows.Forms.ToolStripButton abrirToolStripButton;
         private System.Windows.Forms.ToolStripButton salvarToolStripButton;
-        private System.Windows.Forms.ToolStripButton Apaga_toolStripButton;
-        private System.Windows.Forms.ToolStripButton Limpar_toolStripButton;
+        private System.Windows.Forms.ToolStripButton ApagatoolStripButton;
+        private System.Windows.Forms.ToolStripButton LimpartoolStripButton;
     }
 }

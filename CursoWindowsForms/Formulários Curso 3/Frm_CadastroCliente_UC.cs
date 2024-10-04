@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CursoWindowsFormsBiblioteca.Classes;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.VisualBasic;
+using CursoWindowsFormsBiblioteca;
 
 namespace CursoWindowsForms
 {
@@ -67,11 +71,11 @@ namespace CursoWindowsForms
             Cmb_Estados.Items.Add("Sergipe(SE)");
             Cmb_Estados.Items.Add("Tocantins(TO)");
 
-            Tls_Principal.Items[0].ToolTipText = "Incluir novo cliente";
-            Tls_Principal.Items[1].ToolTipText = "Carregar cliente cadastrado";
-            Tls_Principal.Items[2].ToolTipText = "Salvar cliente";
-            Tls_Principal.Items[3].ToolTipText = "Apagar cliente";
-            Tls_Principal.Items[4].ToolTipText = "Limpar formulário";
+            Tls_Principal.Items[0].ToolTipText = "Incluir na base de dados um novo cliente";
+            Tls_Principal.Items[1].ToolTipText = "Capturar um cliente já cadastrado na base";
+            Tls_Principal.Items[2].ToolTipText = "Atualize o cliente já existente";
+            Tls_Principal.Items[3].ToolTipText = "Apaga o cliente selecionado";
+            Tls_Principal.Items[4].ToolTipText = "Limpa dados da tela de entrada de dados";
 
 
         }
@@ -90,27 +94,137 @@ namespace CursoWindowsForms
 
         private void novoToolStripButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Novo Cadastro");
+
+            try
+            {
+
+                Cliente.Unit C = new Cliente.Unit();
+                C = LeituraFormulario();
+                C.ValidaClasse();
+                C.ValidaComplemento();
+                MessageBox.Show("Classe foi inicializada sem erros", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (ValidationException Ex)
+            {
+                MessageBox.Show(Ex.Message, "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message, "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void abrirToolStripButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Cliente Carregado");
+            MessageBox.Show("Efetuei um clique sobre o botão ABRIR");
         }
 
         private void salvarToolStripButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Cliente Salvo");
+            MessageBox.Show("Efetuei um clique sobre o botão SALVAR");
         }
 
-        private void Apaga_toolStripButton_Click(object sender, EventArgs e)
+        private void ApagatoolStripButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Cliente Apagado");
+            MessageBox.Show("Efetuei um clique sobre o botão EXCLUIR");
         }
 
-        private void Limpar_toolStripButton_Click(object sender, EventArgs e)
+        private void LimpartoolStripButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Cliente Limpo");
+            MessageBox.Show("Efetuei um clique sobre o botão LIMPAR");
+        }
+
+        Cliente.Unit LeituraFormulario()
+        {
+            Cliente.Unit C = new Cliente.Unit();
+            C.Id = Txt_Codigo.Text;
+            C.Nome = Txt_NomeCliente.Text;
+            C.NomeMae = Txt_NomeMae.Text;
+            C.NomePai = Txt_NomePai.Text;
+            if (Chk_TemPai.Checked)
+            {
+                C.NaoTemPai = true;
+            }
+            else
+            {
+                C.NaoTemPai = false;
+            }
+            if (Rdb_Masculino.Checked)
+            {
+                C.Genero = 0;
+            }
+            if (Rdb_Feminino.Checked)
+            {
+                C.Genero = 1;
+            }
+            if (Rdb_Indefinido.Checked)
+            {
+                C.Genero = 2;
+            }
+            C.Cpf = Txt_CPF.Text;
+
+            C.Cep = Txt_CEP.Text;
+            C.Logradouro = Txt_Logradouro.Text;
+            C.Complemento = Txt_Complemento.Text;
+            C.Cidade = Txt_Cidade.Text;
+            C.Bairro = Txt_Bairro.Text;
+
+            if (Cmb_Estados.SelectedIndex < 0)
+            {
+                C.Estado = "";
+            }
+            else
+            {
+                C.Estado = Cmb_Estados.Items[Cmb_Estados.SelectedIndex].ToString();
+            }
+
+            C.Telefone = Txt_Telefone.Text;
+            C.Profissao = Txt_Profissao.Text;
+
+            if (Information.IsNumeric(Txt_RendaFamiliar.Text))
+            {
+                Double vRenda = Convert.ToDouble(Txt_RendaFamiliar.Text);
+                if (vRenda < 0 )
+                {
+                    C.RendaFamiliar = 0;
+                }
+                else
+                {
+                    C.RendaFamiliar = vRenda;
+                }
+            }
+           
+            return C;
+        }
+
+        private void Txt_CEP_Leave(object sender, EventArgs e)
+        {
+            string vCep = Txt_CEP.Text;
+            if (vCep != "")
+            {
+                if (vCep.Length == 8)
+                {
+                    if (Information.IsNumeric(vCep))
+                    {
+                        var vJson = Cls_Uteis.GeraJSONCEP(vCep);
+                        Cep.Unit CEP = new Cep.Unit();
+                        CEP = Cep.DesSerializedClassUnit(vJson);
+                        Txt_Logradouro.Text = CEP.logradouro;
+                        Txt_Bairro.Text = CEP.bairro;
+                        Txt_Cidade.Text = CEP.localidade;
+
+                        Cmb_Estados.SelectedIndex = -1;
+                        for (int i = 0; i <= Cmb_Estados.Items.Count - 1; i++)
+                        {
+                            var vPos = Strings.InStr(Cmb_Estados.Items[i].ToString(), "(" + CEP.uf + ")");
+                            if (vPos > 0)
+                            {
+                                Cmb_Estados.SelectedIndex = i;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
