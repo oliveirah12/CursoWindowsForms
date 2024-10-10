@@ -11,6 +11,7 @@ using CursoWindowsFormsBiblioteca.Classes;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.VisualBasic;
 using CursoWindowsFormsBiblioteca;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace CursoWindowsForms
 {
@@ -131,7 +132,40 @@ namespace CursoWindowsForms
 
         private void LimpartoolStripButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Efetuei um clique sobre o botão LIMPAR");
+            LimparFormulario(this);
+        }
+
+        private void LimparFormulario(Control parent)
+        {
+            foreach(Control control in parent.Controls)
+            {
+
+                if(control is TextBox textBox)
+                {
+                    textBox.Text = ""; 
+                }
+
+                if(control is ComboBox comboBox)
+                {
+                    comboBox.SelectedIndex = -1;
+                }
+
+                if(control is RadioButton radioButton)
+                {
+                    radioButton.Checked = false;
+                }
+
+                if(control is CheckBox checkBox)
+                {
+                    checkBox.Checked = false;    
+                }
+
+                
+                if(control.HasChildren)
+                {
+                    LimparFormulario(control);
+                }
+            }
         }
 
         Cliente.Unit LeituraFormulario()

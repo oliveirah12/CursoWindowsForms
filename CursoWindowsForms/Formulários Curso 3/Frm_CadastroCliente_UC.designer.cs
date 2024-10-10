@@ -342,7 +342,6 @@
             this.Rdb_Indefinido.Name = "Rdb_Indefinido";
             this.Rdb_Indefinido.Size = new System.Drawing.Size(85, 17);
             this.Rdb_Indefinido.TabIndex = 8;
-            this.Rdb_Indefinido.TabStop = true;
             this.Rdb_Indefinido.Text = "radioButton3";
             this.Rdb_Indefinido.UseVisualStyleBackColor = true;
             // 
@@ -353,7 +352,6 @@
             this.Rdb_Feminino.Name = "Rdb_Feminino";
             this.Rdb_Feminino.Size = new System.Drawing.Size(85, 17);
             this.Rdb_Feminino.TabIndex = 7;
-            this.Rdb_Feminino.TabStop = true;
             this.Rdb_Feminino.Text = "radioButton2";
             this.Rdb_Feminino.UseVisualStyleBackColor = true;
             // 
@@ -364,7 +362,6 @@
             this.Rdb_Masculino.Name = "Rdb_Masculino";
             this.Rdb_Masculino.Size = new System.Drawing.Size(85, 17);
             this.Rdb_Masculino.TabIndex = 6;
-            this.Rdb_Masculino.TabStop = true;
             this.Rdb_Masculino.Text = "radioButton1";
             this.Rdb_Masculino.UseVisualStyleBackColor = true;
             // 
